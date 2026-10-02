@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensaje en una Botella - Restaurado</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="luna"></div>
+
+    <!-- Escena Marina -->
+    <div class="escena-botella" id="contenedorBotella" onclick="abrirMensaje(event)">
+        <div class="corcho"></div>
+        <div class="botella">
+            <div class="pergamino-interno"></div>
+        </div>
+    </div>
+
+    <!-- Océano con las 2 olas -->
+    <div class="oceano" id="mar">
+        <div class="ola ola1"></div>
+        <div class="ola ola2"></div>
+    </div>
+
+    <div class="capa-pergamino" id="pantallaPergamino" onclick="cerrarPergamino()">
+        <div class="pergamino-papel" onclick="event.stopPropagation()">
+            <div class="texto-mensaje" id="textoEscribiendo"></div>
+        </div>
+    </div>
+
+    <button class="btn-musica" id="btnMusica" onclick="toggleMusica(event)">✨ ACTIVAR MÚSICA</button>
+
+    <audio id="musica" loop>
+        <source src="https://misleading-red-zaozz68z.edgeone.app/La%20Oreja%20de%20Van%20Gogh%20-%20Rosas%20(Letra_Lyrics)(MP3_160K).mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

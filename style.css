@@ -1,0 +1,229 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background: radial-gradient(circle at 50% 30%, #081133 0%, #030617 50%, #000105 100%);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Georgia', serif;
+    perspective: 1200px;
+    cursor: pointer;
+}
+
+/* FIRMAMENTO DE ESTRELLAS */
+.estrella {
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    animation: parpadear 4s infinite ease-in-out;
+}
+
+@keyframes parpadear {
+    0%, 100% { opacity: 0.15; transform: scale(0.8); }
+    50% { opacity: 0.9; transform: scale(1.2); filter: drop-shadow(0 0 3px #fff); }
+}
+
+.luna {
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at 30% 30%, #ffffff 0%, #fffdf0 40%, #ebdca5 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 50px rgba(255, 253, 240, 0.4), 0 0 100px rgba(255, 253, 240, 0.15);
+    z-index: 2;
+}
+
+/* --- OCÉANO CON DOS CAPAS DE OLAS --- */
+.oceano {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 38%;
+    background: linear-gradient(to bottom, #06152b 0%, #020814 100%);
+    z-index: 4;
+    transition: all 2.5s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: inset 0 20px 40px rgba(255, 255, 255, 0.03);
+}
+
+.oceano.calma {
+    height: 15%;
+    background: #01040a;
+}
+
+.ola {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,42.4V0Z" fill="%23091c38" opacity="0.4"/></svg>') repeat-x;
+    background-size: 50% 100%;
+    animation: oleaje 25s infinite linear;
+}
+
+/* Segunda ola que genera profundidad */
+.ola2 {
+    bottom: -2px;
+    opacity: 0.85;
+    animation: oleaje 16s infinite linear reverse;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,42.4V0Z" fill="%23040e1c" opacity="0.8"/></svg>');
+}
+
+@keyframes oleaje { 
+    0% { transform: translateX(0); } 
+    100% { transform: translateX(-50%); } 
+}
+
+/*  ESCENA DE LA BOTELLA  */
+.escena-botella {
+    position: absolute;
+    bottom: 23%;
+    z-index: 6;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all 2.5s cubic-bezier(0.3, 1, 0.4, 1);
+    animation: flotarOlas 7s infinite ease-in-out;
+}
+
+@keyframes flotarOlas {
+    0%, 100% { transform: translateY(0) rotate(-4deg) rotateY(-5deg); }
+    50% { transform: translateY(-20px) rotate(6deg) rotateY(10deg); }
+}
+
+/* Diseño estructural completo de la botella */
+.botella {
+    position: relative;
+    width: 85px;
+    height: 190px;
+    background: linear-gradient(135deg, rgba(200, 240, 230, 0.3) 0%, rgba(150, 210, 200, 0.15) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-radius: 25px 25px 35px 35px;
+    box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.3), inset 5px 5px 15px rgba(255, 255, 255, 0.4), 0 15px 35px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+/* Cuello de la botella */
+.botella::before {
+    content: '';
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 37px;
+    background: rgba(180, 220, 210, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+}
+
+.corcho {
+    position: absolute;
+    top: -49px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 17px;
+    background: #734821;
+    border-radius: 3px;
+    z-index: 7;
+}
+
+/* Pergamino interno */
+.pergamino-interno {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-5deg);
+    width: 35px;
+    height: 120px;
+    background: linear-gradient(to right, #decba4, #f4eccf, #decba4);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+.escena-botella.abierta {
+    transform: scale(2.5) translateY(-50px) rotate(720deg);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* PERGAMINO GRANDE DESPLEGABLE  */
+.capa-pergamino {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(1, 3, 10, 0.7);
+    backdrop-filter: blur(0px);
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 2.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.capa-pergamino.mostrar {
+    opacity: 1;
+    pointer-events: auto;
+    backdrop-filter: blur(15px);
+}
+
+.pergamino-papel {
+    width: 90%;
+    max-width: 580px;
+    background: #f7f1db;
+    padding: 55px 45px;
+    border-radius: 4px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), inset 0 0 50px #dfd1a5;
+    border: 1px solid #d4be8d;
+    max-height: 75vh;
+    overflow-y: auto;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+.capa-pergamino.mostrar .pergamino-papel {
+    transform: scaleY(1);
+}
+
+.texto-mensaje {
+    color: #26190b;
+    font-size: 1.35rem;
+    line-height: 2.1;
+    text-align: center;
+    font-style: italic;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.btn-musica {
+    position: absolute;
+    bottom: 35px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 12px 28px;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    z-index: 100;
+}
